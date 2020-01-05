@@ -1,16 +1,17 @@
 <div class="container p-5">
-  <div class="row">
+  <div class="d-flex justify-content-center">
     <form>
       <div class="form-row align-items-center">
         <div class="col-auto">
-          <label class="sr-only" for="name">name</label>
+          <label class="sr-only" for="name">Book</label>
           <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <i class="fas fa-book-open"></i>
               </div>
             </div>
-            <input type="text" class="form-control" id="name" placeholder="name">
+            <input type="text" class="form-control" name="bookName" [(ngModel)]="bookName" #ctrl="ngModel" id="name"
+                   placeholder="Book">
           </div>
         </div>
 
@@ -22,29 +23,27 @@
                 <i class="fas fa-user"></i>
               </div>
             </div>
-            <input type="text" class="form-control" id="author" placeholder="Author">
+            <input type="text" class="form-control" name="authorName" [(ngModel)]="authorName" #ctrl="ngModel"
+                   id="author" placeholder="Author">
           </div>
         </div>
-
-        <div class="col-auto">
-          <label class="sr-only" for="date">publicationDate</label>
+        <div class="col-3">
+          <label class="sr-only" for="author">Author</label>
           <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <i class="fas fa-user"></i>
-              </div>
+
+          <input type="number" class="form-control" name="count" [(ngModel)]="count" #ctrl="ngModel" id="count"
+                 placeholder="Author">
+            <div class="input-group-append">
+              <button type="button" class="btn btn-primary mb-2" (click)="get()">Search</button>
             </div>
-            <input type="text" class="form-control" id="date" placeholder="publicationDate">
           </div>
         </div>
 
 
-        <button type="button" class="btn btn-primary mb-2">Search</button>
       </div>
 
     </form>
   </div>
-
   <div class="row">
     <table class="table">
       <thead>
@@ -59,7 +58,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let book of books; let i = index">
-        <th scope="row">{{i+1}}</th>
+        <th scope="row">{{i + 1}}</th>
         <td>{{book?.bookLabel?.value}}</td>
         <td>{{book?.series_label?.value}}</td>
         <td>{{book?.authorLabel?.value}}</td>

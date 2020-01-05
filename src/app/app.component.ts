@@ -9,16 +9,22 @@ import {Book} from './model';
 })
 export class AppComponent implements OnInit {
   public books: Book[];
+  bookName = 'Raise the Titanic!';
+  authorName = 'Clive Cussler';
+  count = 10;
 
   constructor(private queryService: QueryService) {
   }
 
   ngOnInit(): void {
-    this.queryService.get().subscribe(res => {
+
+  }
+
+
+  get() {
+    this.queryService.get(this.bookName, this.authorName, this.count).subscribe(res => {
       console.log(res);
       this.books = res;
     });
   }
-
-
 }
