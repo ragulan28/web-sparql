@@ -3,28 +3,30 @@ import {QueryService} from './guery.service';
 import {Book} from './model';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public books: Book[];
-  bookName = 'Raise the Titanic!';
-  authorName = 'Clive Cussler';
-  count = 10;
+    public books: Book[];
+    bookName = 'Raise the Titanic!';
+    authorName = 'Clive Cussler';
+    count = 10;
+    date = 1;
 
-  constructor(private queryService: QueryService) {
-  }
+    constructor(private queryService: QueryService) {
+    }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
 
-  }
+    }
 
 
-  get() {
-    this.queryService.get(this.bookName, this.authorName, this.count).subscribe(res => {
-      console.log(res);
-      this.books = res;
-    });
-  }
+    get() {
+      console.log(this.date);
+        this.queryService.get(this.bookName, this.authorName, this.count, this.date).subscribe(res => {
+            console.log(res);
+            this.books = res;
+        });
+    }
 }

@@ -27,6 +27,20 @@
                    id="author" placeholder="Author">
           </div>
         </div>
+        <div class="col-auto">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fas fa-calendar"></i>
+              </div>
+            </div>
+            <select  class="form-control" name="date" [(ngModel)]="date" #ctrl="ngModel"
+                     id="date">
+              <option value="1">ASC</option>
+              <option value="0">DESC</option>
+            </select>
+          </div>
+        </div>
         <div class="col-3">
           <label class="sr-only" for="author">Author</label>
           <div class="input-group mb-2">

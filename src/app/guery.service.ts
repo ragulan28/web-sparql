@@ -13,11 +13,11 @@ export class QueryService {
   constructor(private http: HttpClient) {
   }
 
-  get(bookName: string, authorName: string, count: number): Observable<Book[]> {
+  get(bookName: string, authorName: string, count: number, sort: any): Observable<Book[]> {
 
     let sparqlQuery;
     if (authorName && bookName) {
-      sparqlQuery = this.getByBookAndAuthorQuery(bookName,authorName);
+      sparqlQuery = this.getByBookAndAuthorQuery(bookName, authorName);
     } else if (authorName) {
       sparqlQuery = this.getByAuthorQuery(authorName);
 
@@ -28,7 +28,14 @@ export class QueryService {
       sparqlQuery = this.getQuery();
     }
 
+
+    if (sort == 0) {
+      sparqlQuery = sparqlQuery + `\nORDER BY DESC (?publicationDate)`;
+    }
+
     sparqlQuery = sparqlQuery + `\nLIMIT ${count}`;
+
+    console.log(sparqlQuery);
     const settings = {
       headers: {Accept: 'application/sparql-results+json'},
       params: {query: sparqlQuery}
@@ -86,7 +93,7 @@ export class QueryService {
       '}';
   }
 
-  private getByBookAndAuthorQuery(bookName: string,authorName: string) {
+  private getByBookAndAuthorQuery(bookName: string, authorName: string) {
     return ' SELECT ?book ?bookLabel ?authorLabel ?genre_label ?series_label ?publicationDate\n' +
       'WHERE\n' +
       '{\n' +
